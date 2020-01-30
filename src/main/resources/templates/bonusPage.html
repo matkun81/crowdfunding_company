@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/user/{userId}/company/{companyId}/bonus(companyId =${companyId},userId =${userId})}" enctype="multipart/form-data" class="form-horizontal" method="post">
+    <input type="text" name="name" placeholder="Input name">
+    <input type="text" name="description" placeholder="Input description">
+    <input type="number" name="sumOfMoney" placeholder="Sum of money">
+    <button type="submit">add</button>
+</form>
+<h2>Bonuses</h2>
+
+<table id="bonuses" class="table table-striped">
+    <thead>
+    <tr>
+        <th>Name</th >
+        <th>Description</th>
+        <th>Sum of money</th>
+        <th>Changes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bonus : ${listBonuses}">
+        <td th:text="${bonus.name}"/>
+        <td th:text="${bonus.description}"/>
+        <td th:text="${bonus.sumOfMoney}"/>
+        <td><form th:action="@{/user/{userId}/company/{companyId}/bonus/deleteBonus(userId = ${userId}, companyId = ${companyId})}" class="form-horizontal" method="post">
+        <input type="hidden" th:value="${bonus.id}" name="bonusId">
+        <button type="submit">delete</button>
+        </form>
+        <!--</td>-->
+        <!--<td><a th:href="@{/user/{userId}/editCompany/{companyId}(companyId =${company.id},userId =${currentUser})}"> edit-->
+        <!--</a>-->
+        <!--</td>-->
+        <!--<td><a th:href="@{/user/{userId}/news/{companyId}(companyId =${company.id},userId =${currentUser})}"> News-->
+        <!--</a>-->
+        <!--</td>-->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

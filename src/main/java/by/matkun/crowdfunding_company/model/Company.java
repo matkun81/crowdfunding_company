@@ -1,20 +1,33 @@
 package by.matkun.crowdfunding_company.model;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String description;
+
     private String topic;
+
     private float avgRate;
+
     private float finishSum;
+
     private float currentSum;
-    @OneToMany
-    private News news;
+
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Bonus> listBonus;
+
+    @OneToMany (mappedBy = "company",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<News> listNews;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User owner;
@@ -83,11 +96,19 @@ public class Company {
         this.currentSum = currentSum;
     }
 
-    public News getNews() {
-        return news;
+    public List<Bonus> getListBonus() {
+        return listBonus;
     }
 
-    public void setNews(News news) {
-        this.news = news;
+    public void setListBonus(List<Bonus> listBonus) {
+        this.listBonus = listBonus;
+    }
+
+    public List<News> getListNews() {
+        return listNews;
+    }
+
+    public void setListNews(List<News> listNews) {
+        this.listNews = listNews;
     }
 }

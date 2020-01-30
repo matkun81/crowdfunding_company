@@ -38,11 +38,6 @@ public class UserServiceImplement implements UserService, UserDetailsService{
 
     @Override
     public User findByName(String name) {
-        if (userRepository.findByName(name)==null){
-            User user = new User();
-            user.setId(-1L);
-            return user;
-        }else
         return userRepository.findByName(name);
     }
 

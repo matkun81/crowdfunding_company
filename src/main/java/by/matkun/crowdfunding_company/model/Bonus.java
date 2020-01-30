@@ -1,18 +1,22 @@
 package by.matkun.crowdfunding_company.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Bonus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+
     private String name;
+
     private String description;
+
     private double sumOfMoney;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public Long getId() {
         return Id;
@@ -44,5 +48,13 @@ public class Bonus {
 
     public void setSumOfMoney(double sumOfMoney) {
         this.sumOfMoney = sumOfMoney;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

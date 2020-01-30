@@ -42,6 +42,12 @@
         <td><a th:href="@{/user/{userId}/editCompany/{companyId}(companyId =${company.id},userId =${currentUser})}"> edit
         </a>
         </td>
+        <td><a th:href="@{/user/{userId}/company/{companyId}/news(companyId =${company.id},userId =${currentUser})}"> News
+        </a>
+        </td>
+        <td><a th:href="@{/user/{userId}/company/{companyId}/bonus(companyId =${company.id},userId =${currentUser})}"> Bonuses
+        </a>
+        </td>
     </tr>
     </tbody>
 </table>
